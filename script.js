@@ -37,3 +37,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 4500);
   }
 });
+
+// ===== スクロールフェードイン =====
+const fadeEls = document.querySelectorAll('.fade-hidden');
+if (fadeEls.length > 0) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('is-visible');
+        observer.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => observer.observe(el));
+}
